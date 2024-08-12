@@ -1,0 +1,66 @@
+<section class="main" id="main">
+    <div class="container mt-3">
+        <div class="row d-flex align-items-end">
+            <div class="col">
+                <h3>Estadisticas</h3>
+                <p>Formulario de captura de datos</p>
+            </div>
+            <div class="col-auto ms-auto" ngbDropdown>
+                <button class="btn btn-sm custom-dropdown-toggle" type="button" ngbDropdownToggle>
+                    <i class="bi bi-caret-down"></i>
+                </button>
+                <div ngbDropdownMenu>
+                    <button type="button" ngbDropdownItem (click)="downloadExcel()">Download Excel</button>
+                </div>
+            </div>
+        </div>
+        <app-form
+            (insertEvent)="onInsertItem($event)"
+            (deleteEvent)="onDeleteItem($event)"
+            (updateEvent)="onUpdateItem($event)"
+            (errorEvent)="onFormError($event)"
+            [operationResultObserver]="operationResult$.asObservable()"
+            [autoData]="{
+                vesselsName: autoDataVessels,
+                cargo: autoDataCargos,
+                trader: autoDataTrader,
+                importer: autoDataImporter,
+                country: autoDataCountry,
+                dischargingPort: autoDataDischPort,
+                loadingPort: autoDataLoadingPort,
+            }"
+        ></app-form>
+
+        <div class="mt-2">
+            <app-alert [alertObservable]="$alert.asObservable()"></app-alert>
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-auto">
+                <p class="fs-5">Tabla de datos</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <label class="col-form-label">Seleccione el año</label>
+            </div>
+            <div class="col-auto">
+                <select
+                    class="form-select form-select-sm"
+                    id="year"
+                    [(ngModel)]="yearSelected"
+                    (ngModelChange)="yearChangedHandler()"
+                    name="year"
+                >
+                    @for (y of yearsAvailable(); track $index) {
+                        <option [value]="y">{{ y }}</option>
+                    } @empty {
+                        <option value="0">No hay años</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <app-table [sourceData]="dataset" (editEvent)="editEventHandler($event)"></app-table>
+    </div>
+</section>

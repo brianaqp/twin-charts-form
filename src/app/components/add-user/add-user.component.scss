@@ -1,0 +1,11 @@
+.is-invalid {
+    .form-control {
+        border-color: #dc3545;
+    }
+
+    p {
+        color: #dc3545;
+        margin-top: 5px;
+        font-size: 80%;
+    }
+}

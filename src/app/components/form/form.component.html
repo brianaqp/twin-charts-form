@@ -1,0 +1,221 @@
+<div class="row">
+    <!-- Formulario de captura -->
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div
+                            class="col-12 form-group"
+                            [class.has-error]="formSubmitted && form.controls.vesselName.invalid"
+                        >
+                            <app-input-with-dropdown
+                                title="Vessel name"
+                                formControlName="vesselName"
+                                [items]="autoData().vesselsName"
+                            ></app-input-with-dropdown>
+                            <div *ngIf="formSubmitted && form.controls.vesselName.invalid" class="text-custom-danger">
+                                ***
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div
+                            class="col-12 form-group"
+                            [class.has-error]="formSubmitted && form.controls.cargo.invalid"
+                        >
+                            <app-input-with-dropdown
+                                title="Cargo"
+                                formControlName="cargo"
+                                [items]="autoData().cargo"
+                            ></app-input-with-dropdown>
+                            <div *ngIf="formSubmitted && form.controls.cargo.invalid" class="text-custom-danger">
+                                ***
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo Tonnage -->
+                    <div class="row">
+                        <div
+                            class="col-12 col-md-4 form-group"
+                            [class.has-error]="formSubmitted && form.controls.eta.invalid"
+                        >
+                            <label for="eta">ETA</label>
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control form-control-sm"
+                                    placeholder="dd/mm/yy-yy"
+                                    id="eta"
+                                    formControlName="eta"
+                                    name="eta"
+                                    ngbDatepicker
+                                    #d="ngbDatepicker"
+                                    required
+                                />
+                                <button type="button" class="btn btn-outline-secondary" (click)="d.toggle()">
+                                    <i class="bi bi-calendar2"></i>
+                                </button>
+                            </div>
+                            <div *ngIf="formSubmitted && form.controls.eta.invalid" class="text-custom-danger">
+                                Asegurese de ingresar la fecha en el formato correcto: dd/mm/yy-yy
+                            </div>
+                        </div>
+
+                        <div
+                            class="col-12 col-md-4 form-group"
+                            [class.has-error]="formSubmitted && form.controls.tonnage.invalid"
+                        >
+                            <label for="tonnage">Tonnage</label>
+                            <input
+                                type="text"
+                                mask="separator.3"
+                                decimalMarker="."
+                                thousandSeparator=","
+                                class="form-control form-control-sm"
+                                id="tonnage"
+                                name="tonnage"
+                                formControlName="tonnage"
+                                required
+                            />
+                            <div *ngIf="formSubmitted && form.controls.tonnage.invalid" class="text-custom-danger">
+                                ***
+                            </div>
+                        </div>
+
+                        <!-- Campo Country -->
+                        <div
+                            class="col-12 col-md-4 form-group"
+                            [class.has-error]="formSubmitted && form.controls.country.invalid"
+                        >
+                            <app-input-with-dropdown
+                                title="Country"
+                                formControlName="country"
+                                [items]="autoData().country"
+                            ></app-input-with-dropdown>
+                            <div *ngIf="formSubmitted && form.controls.country.invalid" class="text-custom-danger">
+                                ***
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo Cargo -->
+
+                    <div class="row">
+                        <!-- Campo Importer -->
+                        <div
+                            class="col-6 form-group"
+                            [class.has-error]="formSubmitted && form.controls.importer.invalid"
+                        >
+                            <app-input-with-dropdown
+                                title="Loading Port"
+                                formControlName="loadingPort"
+                                [items]="autoData().loadingPort"
+                            ></app-input-with-dropdown>
+                            <p class="fs-6 text-body-secondary"></p>
+                            <div *ngIf="formSubmitted && form.controls.importer.invalid" class="text-custom-danger">
+                                ***
+                            </div>
+                        </div>
+
+                        <!-- Campo Trader -->
+                        <div class="col-6 form-group" [class.has-error]="formSubmitted && form.controls.trader.invalid">
+                            <app-input-with-dropdown
+                                title="Trader/Supplier"
+                                formControlName="trader"
+                                [items]="autoData().trader"
+                            ></app-input-with-dropdown>
+                            <div *ngIf="formSubmitted && form.controls.trader.invalid" class="text-custom-danger">
+                                ***
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Campo Loading Port -->
+                        <div
+                            class="col-6 form-group"
+                            [class.has-error]="formSubmitted && form.controls.loadingPort.invalid"
+                        >
+                            <app-input-with-dropdown
+                                title="Importer"
+                                formControlName="importer"
+                                [items]="autoData().importer"
+                            ></app-input-with-dropdown>
+                            <div *ngIf="formSubmitted && form.controls.loadingPort.invalid" class="text-custom-danger">
+                                ***
+                            </div>
+                        </div>
+
+                        <!-- Campo Discharging Port -->
+                        <div
+                            class="col-6 form-group"
+                            [class.has-error]="formSubmitted && form.controls.dischargingPort.invalid"
+                        >
+                            <label for="dischargingPort" class="form-label">Discharging Port</label>
+                            <select
+                                class="form-select"
+                                name="dischargingPort"
+                                id="dischargingPort"
+                                formControlName="dischargingPort"
+                            >
+                                <option value="" disabled></option>
+                                @for (item of availablePorts; track $index) {
+                                    <option value="{{ item }}">{{ item }}</option>
+                                }
+                            </select>
+                            <div
+                                *ngIf="formSubmitted && form.controls.dischargingPort.invalid"
+                                class="text-custom-danger"
+                            >
+                                ***
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  Aviso -->
+                    <div class="row" *ngIf="formSubmitted && this.form.invalid">
+                        <div class="col">
+                            <div class="text-custom-danger">LLene todos los campos para continuar (***)</div>
+                        </div>
+                    </div>
+
+                    <!-- Botones del Formulario -->
+                    @if (!isInEditMode) {
+                        <div class="row mt-2 justify-content-end">
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-success btn-sm ml-2" (click)="onSubmit('insert')">
+                                    Guardar
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-secondary btn-sm ml-2" (click)="clearForm()">
+                                    Limpiar
+                                </button>
+                            </div>
+                        </div>
+                    } @else {
+                        <div class="row mt-2 justify-content-end">
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-success btn-sm ml-2" (click)="onSubmit('update')">
+                                    Actualizar
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-secondary btn-sm ml-2" (click)="stopEditMode()">
+                                    Regresar
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-danger btn-sm ml-2" (click)="onSubmit('delete')">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

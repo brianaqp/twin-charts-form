@@ -1,0 +1,86 @@
+<div class="container">
+    @if (isToastAlive) {
+        <ngb-toast [autohide]="true" style="background-color: rgb(201, 48, 48); width: 600px; color: white">
+            <i class="bi bi-database-x"></i> Hubo un error al intentar recuperar los usuarios. Por favor, recarge la
+            pagina.
+        </ngb-toast>
+    }
+    <div class="input-group mb-3 mt-3">
+        <span class="input-group-text" id="basic-addon1">Search</span>
+        <input type="text" (input)="onSearchInputChange($event)" class="form-control" aria-label="Username" />
+        <button class="btn btn-outline-secondary">
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
+    <hr />
+    @for (item of users | filter: searchInput(); track $index) {
+        <div class="card mt-2 w-100" style="width: 18rem">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 col-md-10">
+                        <h5 class="card-title">{{ item.username }}</h5>
+                        @switch (checkStatus(item)) {
+                            @case ('valid') {
+                                <span class="badge bg-success">Active</span>
+                            }
+                            @case ('invalid') {
+                                <span class="badge bg-danger">Inactive</span>
+                            }
+                            @case ('soon') {
+                                <span class="badge bg-warning">Expires in {{ checkDays(item) }} days</span>
+                            }
+                        }
+                    </div>
+                    <div class="col-4 col-md-2 d-flex justify-content-center align-items-center gap-2">
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            ngbTooltip=""
+                            placement="left"
+                            triggers="manual"
+                            #t1="ngbTooltip"
+                            (click)="revalidateUser(item)"
+                        >
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            ngbTooltip=""
+                            triggers="manual"
+                            placement="left"
+                            #t2="ngbTooltip"
+                            (click)="openModal(deleteModal, item)"
+                        >
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    } @empty {
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">No users found</h5>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Modal -->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-delete-user">Confirm delete user</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>
+            ¿Estas seguro/a de querer borrar la cuenta de <span class="text-primary">{{ tempUser?.username }}</span
+            >?
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel')">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('confirm')">Eliminar</button>
+    </div>
+</ng-template>

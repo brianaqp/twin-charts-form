@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg bg-body-secondary mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink=".">TwinCharts</a>
+
+        <!-- Navbar toggle -->
+        <button type="button" class="navbar-toggler" (click)="toggleMenu()">
+            <i class="bi bi-chevron-compact-down"></i>
+        </button>
+
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" routerLink="/home" aria-current="page" (click)="toggleMenu()">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/users" (click)="toggleMenu()">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/add-user" (click)="toggleMenu()">Create access</a>
+                </li>
+                <li class="na-item">
+                    <a class="nav-link" routerLink="/configuration" (click)="toggleMenu()">Configuration</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,127 @@
+<!-- Tabla con la lista de elementos -->
+<!-- Form section -->
+
+<form [formGroup]="filterForm">
+    <div class="table-responsive">
+        <table class="table table-striped table-filter">
+            <tbody>
+                <tr>
+                    <td>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Vessel Name"
+                            formControlName="vesselName"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="ETA"
+                            formControlName="eta"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Cargo"
+                            formControlName="cargo"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Importer"
+                            formControlName="importer"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Trader"
+                            formControlName="trader"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Loading Port"
+                            formControlName="loadingPort"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Country"
+                            formControlName="country"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Discharge Port"
+                            formControlName="dischargingPort"
+                        />
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-secondary" (click)="resetFilterForm()">
+                            <i class="bi bi-eraser"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
+<hr />
+
+<div class="table-responsive-lg">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr class="thead-dark">
+                <th scope="col" (click)="sort('vesselName')">Vessel Name</th>
+                <th scope="col" (click)="sort('eta')">ETA</th>
+                <!-- <th scope="col" (click)="sort('etb')">ETB</th> -->
+                <!-- <th scope="col" (click)="sort('etc')">ETC</th> -->
+                <th scope="col" (click)="sort('tonnage')">Tonnage</th>
+                <th scope="col" (click)="sort('cargo')">Cargo</th>
+                <th scope="col" (click)="sort('importer')">Importer</th>
+                <th scope="col" (click)="sort('trader')">Trader/Supplier</th>
+                <th scope="col" (click)="sort('loadingPort')">Loading Port</th>
+                <th scope="col" (click)="sort('country')">Country of Origin</th>
+                <th scope="col" (click)="sort('dischargingPort')">Discharge Port</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (i of displayedData; track $index) {
+                <tr>
+                    <td>{{ i.vesselName }}</td>
+                    <td>{{ i.eta | customDatePipe }}</td>
+                    <!-- <td>{{ i.etb }}</td> -->
+                    <!-- <td>{{ i.etc }}</td> -->
+                    <td>{{ i.tonnage.toString() | number: '1.0-3' : 'en' }}</td>
+                    <td>{{ i.cargo }}</td>
+                    <td>{{ i.importer }}</td>
+                    <td>{{ i.trader }}</td>
+                    <td>{{ i.loadingPort }}</td>
+                    <td>{{ i.country }}</td>
+                    <td>{{ i.dischargingPort }}</td>
+                    <button class="btn btn-secondary btn-sm btn-edit" (click)="onItemClicked(i)" href="">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<footer style="height: 300px"></footer>
