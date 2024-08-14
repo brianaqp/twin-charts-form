@@ -15,4 +15,18 @@ export class NavComponent {
     toggleMenu() {
         this.isMenuCollapsed = !this.isMenuCollapsed;
     }
+
+    toggleDarkMode() {
+        // Edit html data-theme attribute
+        const html = document.querySelector('html');
+        if (!html) {
+            return
+        }
+
+        if (html.getAttribute('data-bs-theme') === 'dark') {
+            html.setAttribute('data-bs-theme', 'light');
+        } else {
+            html.setAttribute('data-bs-theme', 'dark');
+        }
+    }
 }
