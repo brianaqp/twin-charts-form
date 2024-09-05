@@ -2,8 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Statistics, StatisticsKeys } from '../interfaces/model';
 import { DeleteResult, InsertOneResult } from 'mongodb';
-import { ApiResponse, AutoCompleteData, StringObjectId, UpdateCustomResult } from '../interfaces/apiResponse';
-import { environment } from '../../environments/environment';
+import {
+    ApiResponse,
+    AutoCompleteData,
+    StringObjectId,
+    UpdateCustomResult,
+} from '../interfaces/apiResponse';
+import { environment } from '../../environments/environment.dev';
 
 @Injectable({
     providedIn: 'root',
@@ -22,8 +27,18 @@ export class ApiService {
         return this.http.get<ApiResponse<Statistics[], null>>(`${this.api}/${year}`);
     }
 
+    getDataByWeek() {
+        return this.http.get<ApiResponse<any, null>>(`${this.api}/weekly`);
+    }
+
+    getDataByUpcoming() {
+        return this.http.get<ApiResponse<any, null>>(`${this.api}/upcoming`);
+    }
+
     getAutoCompleteData(property: StatisticsKeys) {
-        return this.http.get<ApiResponse<AutoCompleteData, null>>(`${this.api}/distinct/${property}`);
+        return this.http.get<ApiResponse<AutoCompleteData, null>>(
+            `${this.api}/distinct/${property}`,
+        );
     }
 
     // --- POST METHODS ---

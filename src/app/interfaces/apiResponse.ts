@@ -1,4 +1,4 @@
-import { StatisticsKeys } from "./model";
+import { StatisticsKeys } from './model';
 
 export interface ApiResponse<T, M> {
     data: T;
@@ -19,4 +19,4 @@ export type UpdateCustomResult = {
 export type AutoCompleteData = {
     data: string[];
     field: StatisticsKeys;
-}
+};

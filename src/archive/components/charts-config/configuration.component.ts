@@ -10,7 +10,13 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'app-charts-config',
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, HoverClassDirective, AlertComponent, NgbTooltipModule],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        HoverClassDirective,
+        AlertComponent,
+        NgbTooltipModule,
+    ],
     providers: [ConfigurationService],
     templateUrl: './configuration.component.html',
     styleUrl: './configuration.component.scss',
@@ -124,7 +130,7 @@ export class ConfigurationComponent implements OnInit {
                 message: 'No se puede eliminar el único año disponible.',
             });
             return;
-        };
+        }
         this.chartsSvc.deleteYear(item).subscribe({
             next: res => {
                 if (res.log.modifiedCount >= 1) {

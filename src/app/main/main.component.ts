@@ -11,7 +11,6 @@ import { TableComponent } from '../components/table/table.component';
 import { Subject, catchError, forkJoin, from, mergeMap, of, switchMap, toArray } from 'rxjs';
 import { AlertComponent } from '../components/alert.component';
 import { CommunicationService } from '../services/communication.service';
-import { UsersService } from '../services/users.service';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 /** Component que representa la aplicación principal
@@ -32,12 +31,11 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
         AlertComponent,
         NgbDropdownModule,
     ],
-    providers: [ApiService, CommunicationService, UsersService],
+    providers: [ApiService, CommunicationService],
 })
 export class MainComponent implements OnInit, OnDestroy {
     private readonly apiSvc = inject(ApiService);
     private readonly commSvc = inject(CommunicationService); // Provide communication with the form component.
-    private readonly authSvc = inject(UsersService);
 
     // --- PROPERTIES
     // Variable que almacena las estadisticas recibidas.
@@ -246,7 +244,7 @@ export class MainComponent implements OnInit, OnDestroy {
     pullAutoComplete() {
         const fields: StatisticsKeys[] = [
             'vesselName',
-            'cargo', 
+            'cargo',
             'importer',
             'trader',
             'loadingPort',
@@ -260,17 +258,21 @@ export class MainComponent implements OnInit, OnDestroy {
                     this.apiSvc.getAutoCompleteData(field).pipe(
                         catchError(error => {
                             console.error(`Error retrieving autocomplete for ${field}:`, error);
-                            return of({ message: '', data: {
-                                data: [],
-                                field: field,
-                            }, log: null }); // Return an empty array for the failed request
+                            return of({
+                                message: '',
+                                data: {
+                                    data: [],
+                                    field: field,
+                                },
+                                log: null,
+                            }); // Return an empty array for the failed request
                         }),
                     ),
                 ),
                 toArray(),
             )
             .subscribe(results => {
-                results.forEach((result) => {
+                results.forEach(result => {
                     switch (result.data.field) {
                         case 'vesselName':
                             this.autoDataVessels = result.data.data;

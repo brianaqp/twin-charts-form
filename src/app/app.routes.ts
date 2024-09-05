@@ -1,14 +1,11 @@
 import { Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
-import { Token } from '@angular/compiler';
-import { UsersComponent } from './components/users/users.component';
-import { AddUserComponent } from './components/add-user/add-user.component';
-import { ConfigurationComponent } from './components/charts-config/configuration.component';
+import { WeeklyComponent } from './components/weekly/weekly.component';
+import { UpcomingComponent } from './components/upcoming/upcoming.component';
 
 export const routes: Routes = [
     { path: '', component: MainComponent },
-    { path: 'users', component: UsersComponent },
-    { path: 'add-user', component: AddUserComponent },
-    { path: 'configuration', component: ConfigurationComponent },
+    { path: 'weekly', component: WeeklyComponent },
+    { path: 'upcoming', component: UpcomingComponent },
     { path: '**', redirectTo: '' },
 ];

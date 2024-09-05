@@ -6,7 +6,9 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { TokenInterceptorComponent } from './components/token-interceptor/token-interceptor.component';
 
 export const appConfig: ApplicationConfig = {
-    providers: [provideRouter(routes), provideHttpClient(withInterceptorsFromDi()), 
-        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorComponent, multi: true }
+    providers: [
+        provideRouter(routes),
+        provideHttpClient(withInterceptorsFromDi()),
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorComponent, multi: true },
     ],
 };

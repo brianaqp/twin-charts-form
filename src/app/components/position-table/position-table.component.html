@@ -1,0 +1,35 @@
+<h3>Posición de buques</h3>
+<table [ngStyle]="table">
+    <thead style="font-weight: lighter;">
+        <tr>
+            <th [ngStyle]="ch">Vessel Name</th>
+            <th [ngStyle]="ch">ETA</th>
+            <th [ngStyle]="ch">Tonnage</th>
+            <th [ngStyle]="ch">Cargo</th>
+            <th [ngStyle]="ch">Importer</th>
+            <th [ngStyle]="ch">Trader/Supplier</th>
+            <th [ngStyle]="ch">Loading Port</th>
+            <th [ngStyle]="ch">Origin</th>
+            <th [ngStyle]="ch">Discharge Port</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (v of data(); track $index) {
+            <tr>
+                <td [ngStyle]="cb">{{ v.vesselName }}</td>
+                <td [ngStyle]="cb">{{ v.eta | customDatePipe }}</td>
+                <td [ngStyle]="cb">{{ v.tonnage.toString() | number: '1.0-3' : 'en' }}</td>
+                <td [ngStyle]="cb">{{ v.cargo }}</td>
+                <td [ngStyle]="cb">{{ v.importer }}</td>
+                <td [ngStyle]="cb">{{ v.trader }}</td>
+                <td [ngStyle]="cb">{{ v.loadingPort }}</td>
+                <td [ngStyle]="cb">{{ v.country }}</td>
+                <td [ngStyle]="cb">{{ v.dischargingPort }}</td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="9" [ngStyle]="cb">Sin elementos</td>
+            </tr>
+        }
+    </tbody>
+</table>

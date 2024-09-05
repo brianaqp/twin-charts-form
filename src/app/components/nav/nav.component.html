@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-secondary mb-3">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink=".">TwinCharts</a>
+        <a class="navbar-brand" routerLink="/home">TwinCharts</a>
 
         <!-- Navbar toggle -->
         <button type="button" class="navbar-toggler" (click)="toggleMenu()">
@@ -10,19 +10,15 @@
         <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/home" aria-current="page" (click)="toggleMenu()">Home</a>
+                    <a class="nav-link" (click)="toggleDarkMode()" (click)="toggleMenu()">
+                        <i class="bi bi-brightness-alt-high-fill"></i>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/users" (click)="toggleMenu()">Users</a>
+                    <a class="nav-link" routerLink="/weekly" (click)="toggleMenu()">Semanal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/add-user" (click)="toggleMenu()">Create access</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/configuration" (click)="toggleMenu()">Configuration</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" (click)="toggleDarkMode()" (click)="toggleMenu()"><i class="bi bi-brightness-alt-high-fill"></i></a>
+                    <a class="nav-link" routerLink="/upcoming">Proximos</a>
                 </li>
             </ul>
         </div>

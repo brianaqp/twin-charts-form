@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { ApiResponse } from '../interfaces/apiResponse';
+import { ApiResponse } from '../../interfaces/apiResponse';
 import { UpdateResult } from 'mongodb';
 import { ChartsConfiguration } from '../interfaces/config';
 

@@ -244,7 +244,7 @@ export class FormComponent implements OnInit, OnDestroy {
             return;
         }
 
-        console.log(this.form.value.vesselName)
+        console.log(this.form.value.vesselName);
         console.log('Form submitted', this.form.controls.vesselName.valid);
         // Validation
         this.formSubmitted = true;

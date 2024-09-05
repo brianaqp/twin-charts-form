@@ -20,10 +20,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div
-                            class="col-12 form-group"
-                            [class.has-error]="formSubmitted && form.controls.cargo.invalid"
-                        >
+                        <div class="col-12 form-group" [class.has-error]="formSubmitted && form.controls.cargo.invalid">
                             <app-input-with-dropdown
                                 title="Cargo"
                                 formControlName="cargo"

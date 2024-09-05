@@ -20,7 +20,7 @@ export class NavComponent {
         // Edit html data-theme attribute
         const html = document.querySelector('html');
         if (!html) {
-            return
+            return;
         }
 
         if (html.getAttribute('data-bs-theme') === 'dark') {
