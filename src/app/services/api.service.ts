@@ -28,11 +28,11 @@ export class ApiService {
     }
 
     getDataByWeek() {
-        return this.http.get<ApiResponse<any, null>>(`${this.api}/weekly`);
+        return this.http.get<ApiResponse<Statistics[], null>>(`${this.api}/weekly`);
     }
 
     getDataByUpcoming() {
-        return this.http.get<ApiResponse<any, null>>(`${this.api}/upcoming`);
+        return this.http.get<ApiResponse<Statistics[], null>>(`${this.api}/upcoming`);
     }
 
     getAutoCompleteData(property: StatisticsKeys) {

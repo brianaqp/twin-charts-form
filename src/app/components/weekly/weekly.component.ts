@@ -27,8 +27,8 @@ export class WeeklyComponent implements OnInit {
     ngOnInit(): void {
         // Pull weekly data
         this.apiSvc.getDataByWeek().subscribe(res => {
-            if (res.data.result) {
-                this.data = res.data.result;
+            if (res.data) {
+                this.data = res.data;
             }
         });
     }

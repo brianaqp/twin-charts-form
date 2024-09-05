@@ -25,7 +25,9 @@ export class UpcomingComponent implements OnInit {
     ngOnInit(): void {
         // Pull data
         this.apiSvc.getDataByUpcoming().subscribe(res => {
-            this.data = res.data.result;
+            if (res.data) {
+                this.data = res.data;
+            }
         });
     }
 }
