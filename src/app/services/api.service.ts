@@ -8,7 +8,7 @@ import {
     StringObjectId,
     UpdateCustomResult,
 } from '../interfaces/apiResponse';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.dev';
 
 @Injectable({
     providedIn: 'root',
@@ -73,8 +73,14 @@ export class ApiService {
     }
 
     // --- FILES METHODS ---
-    getDataInExcel(year: string) {
-        return this.http.get(`${this.apiFiles}/excel/statistics/${year}`, {
+    getExcelByYear(year: string) {
+        return this.http.get(`${this.apiFiles}/excel/statistics/year/${year}`, {
+            responseType: 'blob',
+        });
+    }
+
+    getExcelByPeriod(category: 'weekly' | 'upcoming') {
+        return this.http.get(`${this.apiFiles}/excel/statistics/${category}`, {
             responseType: 'blob',
         });
     }

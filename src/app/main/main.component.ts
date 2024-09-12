@@ -322,7 +322,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
     // --- Excel methods
     downloadExcel(): void {
-        this.apiSvc.getDataInExcel(this.yearSelected).subscribe({
+        this.apiSvc.getExcelByYear(this.yearSelected).subscribe({
             next: (res: Blob) => {
                 const blob = res;
                 const url = window.URL.createObjectURL(blob);
