@@ -8,7 +8,7 @@ import {
     StringObjectId,
     UpdateCustomResult,
 } from '../interfaces/apiResponse';
-import { environment } from '../../environments/environment.dev';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -74,7 +74,7 @@ export class ApiService {
 
     // --- FILES METHODS ---
     getDataInExcel(year: string) {
-        return this.http.get(`${this.apiFiles}/excel/${year}`, {
+        return this.http.get(`${this.apiFiles}/excel/statistics/${year}`, {
             responseType: 'blob',
         });
     }

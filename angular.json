@@ -17,8 +17,8 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:application",
                     "options": {
-                        "outputPath": "dist/client",
-                        "baseHref": "/charts/",
+                        "outputPath": "../server/dist",
+                        "baseHref": "/",
                         "index": "src/index.html",
                         "browser": "src/main.ts",
                         "polyfills": ["zone.js"],
