@@ -75,6 +75,27 @@ export class WeeklyComponent implements OnInit, AfterViewInit {
     initChart() {
         this.chart = echarts.init(document.getElementById('chart'));
 
+        let result = [];
+        let map: any = {};
+
+        this.data.forEach(i => {
+            const name = i.vesselName;
+            const port = i.dischargingPort;
+            const tonn = i.tonnage;
+
+            if (map[name]) {
+                if (map[name][port]) {
+                    // 1. Case 1. Also have same port
+                    map[name][port] += tonn;
+                } else {
+                    // 2. Dont exist
+                    map[name][port] = tonn;
+                }
+            } else {
+                map[name][port] = tonn;
+            }
+        });
+
         // Create an object
         /** {
          * vesselName: string,
