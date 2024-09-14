@@ -8,7 +8,7 @@ import {
     StringObjectId,
     UpdateCustomResult,
 } from '../interfaces/apiResponse';
-import { environment } from '../../environments/environment.dev';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',

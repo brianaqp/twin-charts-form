@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ɵgetEnsureDirtyViewsAreAlwaysReachable } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { PositionTableComponent } from '../position-table/position-table.component';
 import { CommonModule } from '@angular/common';
@@ -6,31 +6,13 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../alert.component';
 import { Subject } from 'rxjs';
 import { AlertEvent } from '../../interfaces/alert';
+import { ChartsComponent } from '../charts/charts.component';
 
 @Component({
     selector: 'app-upcoming',
     standalone: true,
-    imports: [PositionTableComponent, NgbDropdownModule, AlertComponent],
-    template: `
-    <div class="container">
-        <app-alert [alertObservable]="alert$.asObservable()"></app-alert>
-        <div>
-            <i class="bi bi-question-circle"></i>
-            <span class="text-body-secondary">&nbsp;Datos desde hoy hasta 6 meses.</span>
-        </div>
-        <div class="d-flex flex-row" >
-            <h1>Próximos por arrival</h1>
-            <div ngbDropdown>
-                <button class="btn btn-sm custom-dropdown-toggle" type="button" ngbDropdownToggle>
-                    <i class="bi bi-caret-down"></i>
-                </button>
-                <div ngbDropdownMenu>
-                    <button type="button" ngbDropdownItem (click)="downloadExcel()">Download Excel</button>
-                </div>
-            </div>
-        </div>
-        <app-position-table [data]="data"></app-position-table>
-    </div>`,
+    imports: [PositionTableComponent, NgbDropdownModule, AlertComponent, ChartsComponent],
+    templateUrl: './upcoming.component.html',
     styles: `
     // Quita el simbolo de los dropdowns
     .custom-dropdown-toggle::after {
@@ -44,7 +26,7 @@ import { AlertEvent } from '../../interfaces/alert';
 })
 
 export class UpcomingComponent implements OnInit {
-    data: any = [];
+    data: any[] = [];
     alert$ = new Subject<AlertEvent>();
 
     private readonly apiSvc = inject(ApiService);

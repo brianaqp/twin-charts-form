@@ -1,0 +1,22 @@
+<div class="container">
+    <app-alert [alertObservable]="alert$.asObservable()"></app-alert>
+    <div>
+        <i class="bi bi-question-circle"></i>
+        <span class="text-body-secondary">&nbsp;Datos desde hoy hasta 10 dias.</span>
+    </div>
+    <div class="d-flex flex-row" >
+        <h1>Semanal</h1>    
+        <div ngbDropdown>
+            <button class="btn btn-sm custom-dropdown-toggle" type="button" ngbDropdownToggle>
+                <i class="bi bi-caret-down"></i>
+            </button>
+            <div ngbDropdownMenu>
+                <button type="button" ngbDropdownItem (click)="downloadExcel()">Download Excel</button>
+            </div>
+        </div>
+    </div>
+    <app-position-table [data]="data"></app-position-table>
+    <div class="mb-4"></div>
+    <app-charts [data]="data"></app-charts>
+    <footer class="mt-2">&nbsp;</footer>
+</div>
