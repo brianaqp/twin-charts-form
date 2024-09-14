@@ -1,4 +1,4 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, effect, HostListener, input } from '@angular/core';
 import * as echarts from 'echarts';
 import chroma from 'chroma-js';
 
@@ -30,6 +30,12 @@ export class ChartsComponent {
         this.initChart();
       }
     })
+  }
+
+  // Resize event for windows!
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.chart.resize();
   }
 
   initChart() {

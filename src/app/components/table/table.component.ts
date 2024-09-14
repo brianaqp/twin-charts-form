@@ -30,7 +30,9 @@ export class TableComponent implements OnInit {
     // Effects listen parent data changes and assing it to displayed values
     constructor() {
         effect(() => {
-            this.displayedData = this.sourceData();
+            if (this.sourceData().length > 0) {
+                this.displayedData = this.sourceData();
+            }
         });
     }
 
@@ -117,6 +119,7 @@ export class TableComponent implements OnInit {
 
     // --- Table methods
     onItemClicked(item: Statistics) {
+        console.log(item)
         this.editEvent.emit(item);
     }
 

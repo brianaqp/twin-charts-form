@@ -227,7 +227,9 @@ export class FormComponent implements OnInit, OnDestroy {
     }
 
     setForm(data: Statistics) {
-        this.form.setValue(data);
+        // Patch instead of set because document statistics have
+        // 'timestamp' field
+        this.form.patchValue(data);
     }
 
     // --- SETTERS
@@ -244,8 +246,6 @@ export class FormComponent implements OnInit, OnDestroy {
             return;
         }
 
-        console.log(this.form.value.vesselName);
-        console.log('Form submitted', this.form.controls.vesselName.valid);
         // Validation
         this.formSubmitted = true;
         if (this.form.invalid) return;
